@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(34, 34, 34);
+  overflow-x: hidden;
+  font-family: "Nunito", sans-serif;
+}
+
+.navbar.scrolled {
+  background-color: #81d4c2;
+  transition: background 500ms;
+}
+
+p {
+  font-size: xx-large;
+}
+
+#mainNavbar .navbar-brand {
+  color: #ffffff;
+  font-size: 1.5rem;
+  text-shadow: 0px 4px 2px #85858580;
+}
+
+#mainNavbar {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+#mainNavbar .nav-link {
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 4px 2px rgba(133, 133, 133, 0.5);
+}
+
+#mainNavbar .nav-link:hover {
+  color: rgba(126, 167, 177, 0.486);
+}
+
+#introInfo {
+  font-weight: 200;
+  text-transform: uppercase;
+  font-size: 1200px;
+}
+
+.content {
+  margin-top: 100px;
+  margin-bottom: 100px;
+} 
+
+#introInfo span {
+  color: #ff8a04;
+}
+
+#introInfo h1 {
+  font-weight: 100;
+  font-size: 4rem;
+}
+
+.blurb h2 {
+  color: #81d4c2;
+  font-weight: 100;
+  font-size: 2.5rem;
+}
+
+.blurb p {
+  color: #afafaf;
+  font-weight: 100;
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+@media (max-width: 1800px) {
+  #introInfo h1 {
+    font-weight: 100;
+    font-size: 2.8rem;
+  }
+
+}
+
+@media (max-width: 1250px) {
+  #introInfo h1 {
+    font-weight: 100;
+    font-size: 2.2rem;
+  }
+  .blurb h2 {
+    font-size: 1.5rem;  
+  }
+
+  .blurb p{
+      font-size: 1.2rem;
+  }
+}
