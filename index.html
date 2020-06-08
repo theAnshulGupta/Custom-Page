@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <title>Star Wars</title>
+
+    <!-- Paper JS -->
+    <script type="text/javascript" src="assets\js\paper-full.js"></script>
+
+    <!-- Fontawesome JS -->
+    <script
+      src="https://kit.fontawesome.com/caad67a05c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Google Fonts CSS -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets\css\app.css" />
+    <link rel="stylesheet" href="assets\css\style.css" />
+  </head>
+
+  <!-- Background Animation -->
+  <script type="text/paperscript" canvas="canvas">
+    var count = 150;
+
+    var path = new Path.Circle({
+        center: new Point(0, 0),
+        radius: 70,
+        fillColor: 'white',
+        strokeColor: 'black'
+    });
+
+    var symbol = new SymbolDefinition(path);
+
+    for (var i = 0; i < count; i++) {
+        var center = Point.random() * view.size;
+        var placed = symbol.place(center);
+        var scale = (i + 1) / count / 100;
+        placed.scale(scale);
+        placed.data.vector = new Point({
+            angle: Math.random() * 360,
+            length : scale * Math.random() / 5
+        });
+    }
+
+    var vector = new Point({
+        angle: 45,
+        length: 0
+    });
+
+    var mouseVector = vector.clone();
+
+    function onMouseMove(event) {
+        mouseVector = view.center - event.point;
+    }
+
+    function onFrame(event) {
+        vector = vector + (mouseVector - vector) / 30;
+
+        for (var i = 0; i < count; i++) {
+            var item = project.activeLayer.children[i];
+            var size = item.bounds.size;
+            var length = vector.length / 10 * size.width / 10;
+            item.position += vector.normalize(length) + item.data.vector;
+            keepInView(item);
+        }
+    }
+
+    function keepInView(item) {
+        var position = item.position;
+        var itemBounds = item.bounds;
+        var bounds = view.bounds;
+        if (itemBounds.left > bounds.width) {
+            position.x = -item.bounds.width;
+        }
+
+        if (position.x < -itemBounds.width) {
+            position.x = bounds.width + itemBounds.width;
+        }
+
+        if (itemBounds.top > view.size.height) {
+            position.y = -itemBounds.height;
+        }
+
+        if (position.y < -itemBounds.height) {
+            position.y = bounds.height  + itemBounds.height / 2;
+        }
+    }
+  </script>
+
+  <body>
+    <!-- <canvas id="canvas" resize hidpi="on"></canvas> -->
+
+    <nav class="navbar navbar-expand-sm fixed-top navbar-dark" id="mainNavbar">
+      <a class="navbar-brand" href="https://starwars.com"
+        ><i class="fas fa-journal-whills mr-2"></i>Star Wars</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://lego.com"
+              >Lego <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+    <section class="container-fluid px-0">
+      <div class="row align-items-center px-0">
+        <div class="col-xl-6">
+          <div
+            class="d-xl-block d-none text-center text-white mt-5"
+            id="introInfo"
+          >
+            <h1>LEGO STAR<span> WARS</span> <i class="fas fa-rocket"></i></h1>
+            <h1>
+              THE <span>JEDI</span> ORDER <i class="fab fa-jedi-order"></i>
+            </h1>
+            <h1>
+              THE GALACTIC <span>SENATE</span>
+              <i class="fab fa-galactic-senate"></i>
+            </h1>
+            <h1>
+              THE <span>GALACTIC</span> REPUBLIC
+              <i class="fab fa-galactic-republic"></i>
+            </h1>
+            <h1>
+              THE OLD <span>REPUBLIC</span> <i class="fab fa-old-republic"></i>
+            </h1>
+          </div>
+        </div>
+        <div class="col-xl-6 px-0">
+          <img src="assets/imgs/Sand.jpg" class="img-fluid" />
+        </div>
+      </div>
+    </section>
+
+    <section class="container-fluid px-0">
+      <div class="row align-items-center content">
+        <div class="col-xl-6 order-2 order-xl-1">
+          <img src="assets/imgs/Choke.jpg" alt="" class="img-fluid" />
+        </div>
+        <div class="col-xl-6 text-center order-1 order-xl-2">
+          <div class="row justify-content-center mx-0">
+            <div class="col-10 col-xl-8 blurb mb-5 mb-xl-0 px-0">
+              <h2>Vader's Appearence</h2>
+              <p class="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste molestiae beatae, maiores deserunt in voluptatibus
+                aspernatur architecto excepturi delectus soluta? Ipsa, deleniti
+                dolorem hic consequatur repellat eveniet quidem voluptate
+                necessitatibus dolorum delectus minus vitae, ut, veritatis sint
+                ipsum magnam autem nam ex deserunt debitis eaque ratione! Nobis,
+                quidem assumenda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center content">
+        <div class="col-xl-6 text-center">
+          <div class="row justify-content-center">
+            <div class="col-10 col-xl-8 blurb mb-5 mb-xl-0">
+              <h2>Breaking a Keyboard</h2>
+              <p class="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste molestiae beatae, maiores deserunt in voluptatibus
+                aspernatur architecto excepturi delectus soluta? Ipsa, deleniti
+                dolorem hic consequatur repellat eveniet quidem voluptate
+                necessitatibus dolorum delectus minus vitae, ut, veritatis sint
+                ipsum magnam autem nam ex deserunt debitis eaque ratione! Nobis,
+                quidem assumenda.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 px-0">
+          <img src="assets/imgs/Keyboard.jpg" alt="" class="img-fluid" />
+        </div>
+      </div>
+      <div class="row align-items-center content mb-0">
+        <div class="col-xl-6 order-2 order-xl-1">
+          <img src="assets/imgs/Phone.jpg" alt="" class="img-fluid" />
+        </div>
+        <div class="col-xl-6 text-center order-1 order-xl-2">
+          <div class="row justify-content-center mx-0">
+            <div class="col-10 col-xl-8 blurb mb-5 mb-xl-0 px-0">
+              <h2>The Phone Challenge</h2>
+              <p class="lead">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque,
+                iste molestiae beatae, maiores deserunt in voluptatibus
+                aspernatur architecto excepturi delectus soluta? Ipsa, deleniti
+                dolorem hic consequatur repellat eveniet quidem voluptate
+                necessitatibus dolorum delectus minus vitae, ut, veritatis sint
+                ipsum magnam autem nam ex deserunt debitis eaque ratione! Nobis,
+                quidem assumenda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="assets\js\script.js"></script>
+  </body>
+</html>
