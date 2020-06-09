@@ -1,2 +1,9 @@
 # Custom-Page
-Enjoy a gallery of various images formed nicely in an HTML document. It can resize properly and has several customizations that make it interesting to view, like a transparent navbar that gets a background after scrolling, convienent resizing of images, and no text overlap. Built using CSS. Todo: Add space.html as the background to the index. 
+Custom web page built with HTML/CSS/JS, containing an interactive background and custom resizing. Includes Bootstrap, Paper JS, FontAwesome, and Google Fonts for improved visual display. 
+## Features
+- Nav Bar appears as transparent and lights up as the page is scrolled.
+- Background animation follows cursor throughout the page.
+- Various images and text in body.
+- Images and text collapse and resize in various ways based on the size of screen.
+- Star Wars!
+
